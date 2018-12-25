@@ -62,7 +62,6 @@
     "lodash": "^4.17.11",
     "material-icons-font": "^1.4.2",
     "moment-timezone": "^0.5.23",
-    "uupaa.m3u8.js": "^6.1.2",
     "video.js": "^7.3.0",
     "videojs-contrib-quality-levels": "^2.0.9",
     "vue": "^2.5.16",
