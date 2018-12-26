@@ -69,7 +69,12 @@
         var date = moment(this.selectedDate).format('YYYY-MM-DD');
         var vm = this;
         this.$http.get("https://statsapi.web.nhl.com/api/v1/schedule?startDate="+date+"&endDate="+date+"&expand=schedule.teams,schedule.linescore,schedule.broadcasts.all,schedule.game.content.media.epg").then(response => {
-          vm.games = response.data.dates[0].games;
+          if(response.data.totalGames > 0) {
+            vm.games = response.data.dates[0].games;
+          }
+          else {
+            vm.games = [];
+          }
         })
       },
       teamLogo(abbreviation) {

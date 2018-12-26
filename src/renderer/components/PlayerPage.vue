@@ -17,7 +17,8 @@
   import videojs from 'video.js'
 
   // require('silvermine-videojs-quality-selector')(videojs);
-  // require('videojs-hls-quality-selector');
+  require('videojs-contrib-quality-levels');
+  require('videojs-hls-quality-selector');
   
   export default {
     name: 'player',
@@ -29,13 +30,7 @@
       showSnackbar: false
     }),
     mounted: function() {
-      this.player = videojs('my_video_1', {
-        // html5: {
-        //     hlsjsConfig: {
-        //         debug: true
-        //     }
-        // }
-    });
+      this.player = videojs('my_video_1',);
       
       // Listen for async-reply message from main process
       this.$electron.ipcRenderer.on('stream-url', (event, arg) => {
@@ -51,7 +46,8 @@
             else {
               this.player.src({ type: "application/x-mpegURL", src: "http://localhost:3000/m3u8?url="+encodeURIComponent(res.data) });
 
-              // this.player.hlsQualitySelector();
+              this.player.qualityLevels();
+              this.player.hlsQualitySelector();
             }
           });
           
