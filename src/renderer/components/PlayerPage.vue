@@ -1,7 +1,7 @@
 <template>
   <div class="wrapper">
     <div class="video-content">
-          <video-js id="my_video_1" class="vjs-default-skin vjs-16-9 vjs-big-play-centered" controls preload="auto" autoplay width="100%" height="100%">
+          <video-js id="my_video_1" class="video-js vjs-default-skin vjs-big-play-centered" controls preload="auto" autoplay>
           </video-js>
     </div>
     <md-snackbar md-position="center" :md-duration="duration" :md-active.sync="showSnackbar" md-persistent>
@@ -14,12 +14,9 @@
 
   var moment = require('moment-timezone');
 
-  import videojs from 'video.js'
+  // import videojs from 'video.js'
+  var videojs = require('video.js');
 
-  // require('silvermine-videojs-quality-selector')(videojs);
-  require('videojs-contrib-quality-levels');
-  require('videojs-hls-quality-selector');
-  
   export default {
     name: 'player',
     
@@ -37,7 +34,6 @@
           var start = moment.tz(arg[0].gameDate, "America/Danmarkshavn");
           var gamedate = start.clone().tz("America/New_York").format("YYYY-MM-DD");
 
-          console.log(arg[1])
           this.$http.get("http://freegamez.ga/getM3U8.php?league=nhl&date="+gamedate+"&id="+arg[1].mediaPlaybackId+"&cdn=akc").then((res) => {
             if(res.data == "Not available yet")
             {
@@ -45,9 +41,6 @@
             }
             else {
               this.player.src({ type: "application/x-mpegURL", src: "http://localhost:3000/m3u8?url="+encodeURIComponent(res.data) });
-
-              this.player.qualityLevels();
-              this.player.hlsQualitySelector();
             }
           });
           
@@ -58,6 +51,14 @@
 
 <style>
   @import "~video.js/dist/video-js.css";
+
+  div.app, div.page-container, div.md-app {
+    height: 100vh;
+  }
+
+  div.wrapper, div.video-content {
+    height: 100%;
+  }
 
   .md-app {
       max-height: 100vh;
@@ -70,5 +71,11 @@
 
   .system-icons {
     -webkit-app-region: no-drag;
+  }
+  
+
+  #my_video_1 {
+    width: 100%; 
+    height: 100%; 
   }
 </style>
