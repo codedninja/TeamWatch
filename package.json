@@ -59,7 +59,7 @@
     "axios": "^0.18.1",
     "dateformat": "^3.0.3",
     "express": "^4.16.4",
-    "lodash": "^4.17.11",
+    "lodash": "^4.17.13",
     "material-icons-font": "^1.4.2",
     "moment-timezone": "^0.5.23",
     "video.js": "^7.3.0",
